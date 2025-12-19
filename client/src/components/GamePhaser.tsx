@@ -32,7 +32,7 @@ export const GamePhaser: React.FC = () => {
       create() {
         const mapWidth = 1024;
         const mapHeight = 768;
-        const tileSize = 32;
+        const tileSize = 16;  // Zmniejszone kafle
 
         // Add the map background
         const mapBg = this.add.image(mapWidth / 2, mapHeight / 2, 'mapBackground');
@@ -99,12 +99,13 @@ export const GamePhaser: React.FC = () => {
           8 * tileSize + tileSize / 2,
           'playerSprite'
         );
-        this.player.setDisplaySize(tileSize, tileSize);
+        this.player.setDisplaySize(tileSize * 2, tileSize * 2);  // Powiększona postać
         this.player.setCollideWorldBounds(true);
         this.player.setBounce(0);
         
         // Set initial sprite frame (down direction)
         this.player.setCrop(0, 64, 64, 64);
+        this.player.setOrigin(0.5, 0.5);
 
         // Collision with walls and furniture
         if (this.collisionLayer) {
@@ -123,7 +124,7 @@ export const GamePhaser: React.FC = () => {
         // Camera
         this.cameras.main.setBounds(0, 0, mapWidth, mapHeight);
         this.cameras.main.startFollow(this.player);
-        this.cameras.main.setZoom(1.5);
+        this.cameras.main.setZoom(2.5);  // Powiększony zoom dla lepszej widoczności
       }
 
       update() {
@@ -171,8 +172,8 @@ export const GamePhaser: React.FC = () => {
     const config: Phaser.Types.Core.GameConfig = {
       type: Phaser.AUTO,
       parent: 'game-container',
-      width: 512,
-      height: 384,
+      width: 800,
+      height: 600,
       backgroundColor: '#1a1a2e',
       physics: {
         default: 'arcade',
@@ -185,6 +186,7 @@ export const GamePhaser: React.FC = () => {
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
+        expandParent: true,
       },
       render: {
         pixelArt: true,
