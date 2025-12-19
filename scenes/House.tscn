@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3ixr3uw2c8ov"]
+
+[ext_resource type="Texture2D" uid="uid://dkn4h5nh8qlvt" path="res://assets/graphics/map_house.png"]
+[ext_resource type="Script" path="res://assets/scripts/Player.gd"]
+[ext_resource type="Texture2D" uid="uid://b8r1xqh0hy1n9" path="res://assets/graphics/player_bjorn.png"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(32, 32)
+
+[node name="House" type="Node2D"]
+script = SubResource("1")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(512, 384)
+scale = Vector2(1, 1)
+texture = ExtResource("uid://dkn4h5nh8qlvt")
+centered = true
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(512, 384)
+script = ExtResource("uid://b8r1xqh0hy1n9")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("uid://b8r1xqh0hy1n9")
+hframes = 4
+vframes = 2
+frame = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("1")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = 2.5
